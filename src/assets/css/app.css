@@ -900,7 +900,7 @@ body {
 }
 
 .navbar-brand img {
-  max-height: 20px;
+  /*max-height: 20px;*/
   margin-top: -4px;
   vertical-align: middle;
 }
@@ -5099,4 +5099,12 @@ a.text-#000000:hover {
   99.9% {
     background-color: #7266ba;
   }
+}
+.title {
+  position: absolute;
+  left: 65px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 50px;
+  text-align: center;
 }

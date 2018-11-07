@@ -12,7 +12,7 @@
         </button>
         <!-- brand -->
         <a href="#" class="navbar-brand text-lt">
-          <i class="fa fa-apple"></i>
+
           <img :src="logo" alt="." class="hide">
           <span class="hidden-folded m-l-xs">
             <img :src="logo" alt=".">
@@ -31,6 +31,7 @@
             <i class="fa fa-indent fa-fw text-active"></i>
           </a>
         </div>
+        <div class="title">{{systemName}}</div>
         <!-- / buttons -->
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
@@ -47,17 +48,20 @@
             </a>
             <ul class="dropdown-menu" role="menu" id="menu">
               <li>
-                <a href>
+                <a @click="goto('历史消息','/notify_records')">
                   <span class="badge bg-info pull-right">5</span>
                   <span>历史消息</span>
                 </a>
               </li>
               <li class="divider"></li>
               <li>
-                <a href>
-                  <span class="badge bg-danger pull-right">4</span>
-                  <span >消息设置</span>
-                </a>
+
+                  <a @click="goto('消息设置','/notify_settings')">
+                    <span class="badge bg-danger pull-right">4</span>
+                    <span >消息设置</span>
+                  </a>
+
+
               </li>
             </ul>
           </li>
@@ -76,24 +80,24 @@
                 </div>
               </li>
               <li>
-                <a href>
+                <a  @click="goto('个人资料','/userinfo')">
                   <span class="badge bg-danger pull-right">30%</span>
                   <span>个人资料</span>
                 </a>
               </li>
               <li>
-                <a>修改密码</a>
+                <a @click="goto('修改密码','/password')">修改密码</a>
               </li>
               <li>
-                <a>
+                <a @click="goto('退出','/login')">
                   <span class="label bg-info pull-right">NEW</span>
                   退出
                 </a>
               </li>
-              <li class="divider"></li>
-              <li v-for="(v,k) in systemList">
-                <a>{{v.name}}</a>
-              </li>
+              <!--<li class="divider"></li>-->
+              <!--<li v-for="(v,k) in systemList">-->
+                <!--<a>{{v.name}}</a>-->
+              <!--</li>-->
             </ul>
             <!-- / dropdown -->
           </li>
@@ -179,13 +183,27 @@
   export default({
     name:'navMenu',
     props:{
-      menus: Array,
-      systemList: Array,
-      logo: String,
-      copyright: String,
-      navbarHeaderClass: String,
-      navbarCollapseClass: String,
-      appAsideClass: String
+      menus: {
+        type: Array,
+        required:true,
+        default:[{}]
+      },
+      systemName:{
+        type:String,
+        required: true
+      },
+      logo: {
+        type:String,
+        required: true
+      },
+      copyright: {
+        type:String,
+        required: true
+      },
+      themes: {
+        type:String,
+        required: true
+      }
     },
     data() {
       return{
@@ -196,11 +214,36 @@
         v1Name:"",
       }
     },
+    computed: {
+
+      navbarHeaderClass: function () {
+
+        return this.themes.split('|')[0]
+      },
+      navbarCollapseClass: function () {
+
+        return this.themes.split('|')[1]
+      },
+      appAsideClass: function () {
+        return this.themes.split('|')[2]
+      },
+
+    },
     mounted() {
 
     },
+    watch: {
+      menus(newName, oldName) {
+
+        this.showMenu=this.menus[0].name;
+      },
+    },
     methods:{
-      call(e) {
+      goto(name,path){
+        this.changeMenu({name: name,path:path})
+      },
+      add(name,path) {
+        let e = {name:name,path:path}
         this.changeMenu(e)
       },
       closeTab(v){
@@ -224,7 +267,7 @@
         if(this.activeTab == v.path){
           this.topChangeMenu(path)
         }
-        this.lightMenu(path);
+        this.lightThirdMenu(path);
       },
       changeShowMenu(name){
         this.showMenu = name

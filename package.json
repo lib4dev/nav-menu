@@ -1,16 +1,21 @@
 {
   "name": "nav-menu",
   "description": "qxnw sso nav-menu",
-  "version": "1.0.6",
+  "version": "1.1.2",
   "author": "qxnw",
   "license": "MIT",
   "private": false,
   "main": "dist/navMenu.js",
+  "repository" :
+  { "type" : "git",
+    "url" : "https://github.com/micro-plat/nav-menu.git"
+  },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element-ui": "^2.4.8",
     "jquery": "^3.3.1",
     "style-loader": "^0.23.1",
