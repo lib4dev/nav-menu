@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import navMenu from '../src/myPlugin/navMenu/nav-menu'; // 引入
+  import navMenu from 'nav-menu'; // 引入
   export default {
     name: 'app',
     data () {
@@ -37,16 +37,18 @@
     },
     methods:{
       getMenu(){
-        this.$post("/sso/menu/get")
-          .then(res => {
-            this.menus = res;
-          })
-          .catch(err => {
-           alert("获取菜单失败")
-          });
+        // 这里获取菜单数据
+        // this.$post("/sso/menu/get")
+        //   .then(res => {
+        //     this.menus = res;
+        //   })
+        //   .catch(err => {
+        //     console.log(err)
+        //   });
       },
       addTab(name,path){
-        this.$refs.NewTap.add(name,path);   //调用组件方法，添加一个页面
+        //调用组件方法，添加一个页面
+        this.$refs.NewTap.add(name,path);
       }
     }
   }

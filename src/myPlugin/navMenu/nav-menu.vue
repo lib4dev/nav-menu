@@ -243,7 +243,7 @@
         this.changeMenu({name: name,path:path})
       },
       add(name,path) {
-        let e = {name:name,path:path}
+        let e = {name:name,path:path};
         this.changeMenu(e)
       },
       closeTab(v){
