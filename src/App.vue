@@ -35,7 +35,7 @@
     mounted(){
       this.getMenu();
       //向组件添加一个自定义标签，点击标签会路由到一个页面
-      this.$refs.NewTap.add("用户绑定","/user/bind");   //设置默认页面
+      this.$refs.NewTap.add("用户绑定","/user/bind",{a:"111"});   //设置默认页面
     },
     methods:{
       getMenu(){
@@ -47,8 +47,11 @@
            alert("获取菜单失败")
           });
       },
-      addTab(name,path){
-        this.$refs.NewTap.add(name,path);   //调用组件方法，添加一个页面
+      //@name 标签名称
+      //@path 路由
+      //@obj  路由参数 类型：Object
+      addTab(name,path,obj){
+        this.$refs.NewTap.add(name,path,obj);   //调用组件方法，添加一个页面
       }
     }
   }

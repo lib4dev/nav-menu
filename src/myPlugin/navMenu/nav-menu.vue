@@ -245,8 +245,8 @@
       goto(name,path){
         this.changeMenu({name: name,path:path})
       },
-      add(name,path) {
-        let e = {name:name,path:path};
+      add(name,path,obj) {
+        let e = {name:name,path:path,params:obj};
         this.changeMenu(e)
       },
       closeTab(v){
@@ -288,7 +288,7 @@
           this.topTab.push(v2);
         }
         this.lightThirdMenu(v2.path);
-        this.$router.push(v2.path)
+        this.$router.push({path:v2.path,query:v2.params})
       },
       topChangeMenu(path){
         this.activeTab = path;
@@ -361,5 +361,23 @@
   }
   .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+  }
+
+  .aside-wrap{
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    width: 200px;
+    overflow: hidden;
+  }
+  .navi-wrap{
+    position: relative;
+    width: 217px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow: hidden;
+    overflow-y: scroll;
   }
 </style>

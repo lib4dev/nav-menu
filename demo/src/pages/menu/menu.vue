@@ -51,9 +51,9 @@
         //     console.log(err)
         //   });
       },
-      addTab(name,path){
+      addTab(name,path,obj){
         //调用组件方法，添加一个页面
-        this.$refs.NewTap.add(name,path);
+        this.$refs.NewTap.add(name,path,obj);
       }
     }
   }

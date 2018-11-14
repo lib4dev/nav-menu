@@ -63,8 +63,12 @@ npm i nav-menu --save
            console.log(err)
           });
       },
-      addTab(name,path){
-        this.$refs.NewTap.add(name,path);   //调用组件方法，添加一个页面
+      //@name 标签名称
+      //@path 路由
+      //@obj  路由参数 类型：Object
+      addTab(name,path,obj){
+        
+        this.$refs.NewTap.add(name,path,obj);   //调用组件方法，添加一个页面
       }
     }
   }
