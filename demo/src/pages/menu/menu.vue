@@ -6,6 +6,7 @@
       :themes="themes"
       :logo="logo"
       :systemName="systemName"
+      :headpic="headpic"
       ref="NewTap"
     >
       <router-view  @addTab="addTab" />
@@ -23,6 +24,7 @@
     name: 'app',
     data () {
       return {
+        headpic:"http://sso2.100bm.cn:6888/static/img/a0.jpg",
         logo:"http://sso2.100bm.cn:6888/static/img/d879a953c0dc59a7564a861000aaeac3.png",
         copyright:"2018 四川千行你我科技有限公司", //版权信息
         themes:"bg-info|bg-danger|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色

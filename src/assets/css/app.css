@@ -2206,7 +2206,7 @@ fieldset[disabled] .btn-black.active {
 }
 
 .settings {
-  position: fixed;
+  /*position: fixed;*/
   top: 120px;
   right: -240px;
   z-index: 1050;

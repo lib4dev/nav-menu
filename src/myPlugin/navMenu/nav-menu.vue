@@ -68,7 +68,7 @@
           <li class="dropdown">
             <a href="#" data-toggle="class:show" class="dropdown-toggle clear" data-target="#user">
                             <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img src="../../assets/img/a0.jpg" alt="...">
+                <img :src="headpic" alt=".">
                 <i class="on md b-white bottom"></i>
               </span>
             </a>
@@ -203,6 +203,9 @@
       themes: {
         type:String,
         required: true
+      },
+      headpic:{
+        type:String
       }
     },
     data() {
