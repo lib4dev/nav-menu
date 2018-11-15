@@ -16,6 +16,7 @@
 </template>
 
 <script>
+  import menus from './menus'
   import navMenu from '../src/myPlugin/navMenu/nav-menu'; // 引入
   export default {
     name: 'app',
@@ -24,7 +25,7 @@
         headpic:"http://sso2.100bm.cn:6888/static/img/d879a953c0dc59a7564a861000aaeac3.png",
         logo:"http://sso2.100bm.cn:6888/static/img/d879a953c0dc59a7564a861000aaeac3.png",
         copyright:"2018 四川千行你我科技有限公司", //版权信息
-        themes:"bg-info|bg-danger|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
+        themes:"bg-danger|bg-danger|bg-dark light-danger", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
         menus:[{}],  //菜单数据
         systemName:"实惠生活管理系统"  //系统名称
       }
@@ -39,13 +40,9 @@
     },
     methods:{
       getMenu(){
-        this.$post("/sso/menu/get")
-          .then(res => {
-            this.menus = res;
-          })
-          .catch(err => {
-           alert("获取菜单失败")
-          });
+
+            this.menus = menus;
+
       },
       //@name 标签名称
       //@path 路由

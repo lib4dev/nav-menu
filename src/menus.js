@@ -1,0 +1,106 @@
+var menus;
+export default menus = [{
+  "children": [{
+    "children": [{
+      "create_time": "2018-09-13 15:17:05",
+      "icon": " ",
+      "id": "10568",
+      "is_open": "0",
+      "level_id": "3",
+      "name": "核销订单",
+      "parent": "10564",
+      "path": "/user/bind",
+      "sortrank": "10568",
+      "sys_id": "221"
+    }],
+    "create_time": "2018-09-13 15:14:19",
+    "icon": "fa fa-line-chart text-danger",
+    "id": "10564",
+    "is_open": "1",
+    "level_id": "2",
+    "name": "电子券订单",
+    "parent": "10563",
+    "path": "-",
+    "sortrank": "1",
+    "sys_id": "221"
+  }, {
+    "children": [{
+      "create_time": "2018-09-13 15:28:00",
+      "icon": " ",
+      "id": "10579",
+      "is_open": "0",
+      "level_id": "3",
+      "name": "券发布",
+      "parent": "10577",
+      "path": "/repository/product",
+      "sortrank": "2",
+      "sys_id": "221"
+    }],
+    "create_time": "2018-09-13 15:27:18",
+    "icon": "fa fa-tags text-info",
+    "id": "10577",
+    "is_open": "1",
+    "level_id": "2",
+    "name": "制券管理",
+    "parent": "10563",
+    "path": "-",
+    "sortrank": "2",
+    "sys_id": "221"
+  }, {
+    "children": [{
+      "create_time": "2018-09-13 15:22:26",
+      "icon": " ",
+      "id": "10573",
+      "is_open": "0",
+      "level_id": "3",
+      "name": "商户管理",
+      "parent": "10572",
+      "path": "/merchant/merchant/info",
+      "sortrank": "10573",
+      "sys_id": "221"
+    }],
+    "create_time": "2018-09-13 15:22:01",
+    "icon": "fa fa-tags text-success",
+    "id": "10572",
+    "is_open": "1",
+    "level_id": "2",
+    "name": "下游商户",
+    "parent": "10563",
+    "path": "-",
+    "sortrank": "3",
+    "sys_id": "221"
+  }, {
+    "children": [{
+      "create_time": "2018-09-13 15:41:12",
+      "icon": " ",
+      "id": "10597",
+      "is_open": "0",
+      "level_id": "3",
+      "name": "资金流水",
+      "parent": "10595",
+      "path": "/supplier/fund",
+      "sortrank": "4",
+      "sys_id": "221"
+    }],
+    "create_time": "2018-09-13 15:40:37",
+    "icon": "fa fa-paper-plane-o text-primary",
+    "id": "10595",
+    "is_open": "1",
+    "level_id": "2",
+    "name": "供应商",
+    "parent": "10563",
+    "path": "-",
+    "sortrank": "4",
+    "sys_id": "221"
+  }],
+  "create_time": "2018-09-13 15:13:39",
+  "icon": " ",
+  "id": "10563",
+  "is_open": "0",
+  "level_id": "1",
+  "name": "交易承载",
+  "parent": "0",
+  "path": "-",
+  "sortrank": "1",
+  "sys_id": "221"
+}];

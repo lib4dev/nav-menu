@@ -110,7 +110,7 @@
 
     <!-- menu -->
     <div class="app-aside hidden-xs" :class="[appAsideClass?appAsideClass:'']">
-      <div class="aside-wrap">
+      <div class="aside-wrap ">
         <div class="navi-wrap">
           <!-- nav -->
           <nav ui-nav class="navi">
@@ -129,8 +129,8 @@
                   <span class="font-bold">{{v1.name}}</span>
                 </a>
                 <ul class="nav nav-sub dk">
-                  <li v-for="(v2,k2) in v1.children" :class="[v2.path==v2Path ? 'active' : '']">
-                    <a @click="changeMenu(v2)" >
+                  <li v-for="(v2,k2) in v1.children" :class="[v2.path==v2Path ? 'select' : '']">
+                    <a @click="changeMenu(v2)" class="third-hover" >
                       <span>{{v2.name}}</span>
                     </a>
                   </li>
@@ -380,4 +380,17 @@
     overflow: hidden;
     overflow-y: scroll;
   }
+  .light-info .select,.light-info a.third-hover:hover{ background: #23b7e5 !important;}
+  .black-info .select,.black-info a.third-hover:hover{ background: #23b7e5 !important;}
+  .light-danger .select,.light-danger a.third-hover:hover{ background: #f21b1b !important;}
+  .light-dark .select,.light-dark a.third-hover:hover{ background: #3a3f51 !important;}
+  .white-black .select,.white-black a.third-hover:hover{ background: #3a3f51 !important;}
+  .light-success .select,.light-success a.third-hover:hover{ background: #27c24c !important;}
+  .dark-success .select,.dark-success a.third-hover:hover{ background: #27c24c !important;}
+  .dark-primary .select,.dark-primary a.third-hover:hover{ background: #7266ba !important;}
+  .dark-primary .selectc,.dark-primary a.third-hover:hover{ background: #7266ba !important;}
+
+  .nav-sub .select a span {color: #fff!important;}
+
+  .dark-danger .nav-sub a span{ color: #a8a8a8;}
 </style>
