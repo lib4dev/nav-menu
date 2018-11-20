@@ -35,36 +35,36 @@
         <!-- / buttons -->
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown" v-for="(v,k) in menus">
+          <li class="dropdown" v-for="(v,k) in menus" v-if="menus.length > 1">
             <a href="#" class="dropdown-toggle" @click="changeShowMenu(v.name)">
               <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
               <span>{{v.name}}</span>
             </a>
           </li>
-          <li class="dropdown">
-            <a href="#" data-toggle="class:show" class="dropdown-toggle" data-target="#menu">
-              <i class="fa fa-fw fa-plus visible-xs-inline-block"></i>
-              <span>报警消息</span> <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" role="menu" id="menu">
-              <li>
-                <a @click="goto('历史消息','/notify_records')">
-                  <span class="badge bg-info pull-right">5</span>
-                  <span>历史消息</span>
-                </a>
-              </li>
-              <li class="divider"></li>
-              <li>
+          <!--<li class="dropdown">-->
+            <!--<a href="#" data-toggle="class:show" class="dropdown-toggle" data-target="#menu">-->
+              <!--<i class="icon-bell fa-fw"></i>-->
+              <!--&lt;!&ndash;<span>报警消息</span> <span class="caret"></span>&ndash;&gt;-->
+            <!--</a>-->
+            <!--<ul class="dropdown-menu" role="menu" id="menu">-->
+              <!--<li>-->
+                <!--<a @click="goto('历史消息','/notify_records')">-->
+                  <!--<span class="badge bg-info pull-right">5</span>-->
+                  <!--<span>历史消息</span>-->
+                <!--</a>-->
+              <!--</li>-->
+              <!--<li class="divider"></li>-->
+              <!--<li>-->
 
-                  <a @click="goto('消息设置','/notify_settings')">
-                    <span class="badge bg-danger pull-right">4</span>
-                    <span >消息设置</span>
-                  </a>
+                  <!--<a @click="goto('消息设置','/notify_settings')">-->
+                    <!--<span class="badge bg-danger pull-right">4</span>-->
+                    <!--<span >消息设置</span>-->
+                  <!--</a>-->
 
 
-              </li>
-            </ul>
-          </li>
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</li>-->
           <li class="dropdown">
             <a href="#" data-toggle="class:show" class="dropdown-toggle clear" data-target="#user">
                             <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
