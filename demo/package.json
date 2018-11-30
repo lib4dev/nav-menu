@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "login-with-up": "^1.1.1",
-    "nav-menu": "^1.1.6",
+    "nav-menu": "^1.1.7",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

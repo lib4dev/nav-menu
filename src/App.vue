@@ -9,7 +9,7 @@
       :headpic="headpic"
       ref="NewTap"
     >
-      <router-view  @addTab="addTab" />
+      <router-view  @addTab="addTab" @closeTab="closeTab" />
     </nav-menu>
 
   </div>
@@ -48,7 +48,12 @@
       //@path 路由
       //@obj  路由参数 类型：Object
       addTab(name,path,obj){
+        console.log(name,path,obj);
         this.$refs.NewTap.add(name,path,obj);   //调用组件方法，添加一个页面
+      },
+      closeTab(name,path){
+        console.log(name,path);
+        this.$refs.NewTap.closeTab({name:name,path:path});   //调用组件方法，添加一个页面
       }
     }
   }

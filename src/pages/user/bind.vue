@@ -3,6 +3,9 @@
       <button @click="add">
         添加一个标签
       </button>
+      <button @click="close">
+        删除一个标签
+      </button>
 
     </div>
 </template>
@@ -12,13 +15,18 @@
       name: "bind",
       data(){
         return {
-          name:1,
-          path:"/user",
+          name:"hello",
+          path:"/user/hello",
         }
       },
       methods:{
           add(){
+            console.log(this.$router.path);
             this.$emit('addTab',this.name,this.path);
+          },
+          close(){
+
+            this.$emit('closeTab',this.name,this.path);
           }
       }
     }
