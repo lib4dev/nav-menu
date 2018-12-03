@@ -1180,6 +1180,7 @@ html {
   overflow: auto;
   opacity: 1;
 }
+.active .nav{ display: block !important;}
 
 .nav-sub-header {
   display: none !important;

@@ -69,15 +69,19 @@
         </el-table-column>
       </el-table>
       <!-- edit Form -->
-      <el-dialog title="编辑供货商信息" width="30%" @closed="closed" :visible.sync="dialogFormVisible">
+      <el-dialog title="修改密码" width="30%" @closed="closed" :visible.sync="dialogFormVisible">
         <el-form :model="editData">
 
 
-          <el-form-item label="供货商名称">
+          <el-form-item label="原密码">
             <el-input v-model="editData.sp_name"  autocomplete="off"></el-input>
           </el-form-item>
 
-          <el-form-item label="状态">
+          <el-form-item label="新密码">
+            <el-input v-model="editData.status"  autocomplete="off"></el-input>
+          </el-form-item>
+
+          <el-form-item label="确认新密码">
             <el-input v-model="editData.status"  autocomplete="off"></el-input>
           </el-form-item>
 
@@ -115,7 +119,6 @@
         params:{pi:1,ps:10},        //页码，页容量控制
         totalcount: 0,              //数据总条数
         editData:{},                //编辑数据对象
-        addData:{},                 //添加数据对象
         rules: {                    //数据验证规则
           sp_name: [
             { required: true, message: "请输入供货商名称", trigger: "blur" }
