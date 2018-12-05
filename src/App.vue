@@ -11,7 +11,7 @@
       :pwd="pwd"
       ref="NewTap"
     >
-      <router-view  @addTab="addTab" @closeTab="closeTab" />
+      <router-view  @addTab="addTab" @closeTab="closeTab" @setTab="setTab" />
     </nav-menu>
 
   </div>
@@ -54,6 +54,10 @@
       addTab(name,path,obj){
         console.log(name,path,obj);
         this.$refs.NewTap.add(name,path,obj);   //调用组件方法，添加一个页面
+      },
+      setTab(name,path,obj){
+        console.log("outer",name,path,obj);
+        this.$refs.NewTap.set(name,path,obj);
       },
       closeTab(name,path){
         console.log(name,path);

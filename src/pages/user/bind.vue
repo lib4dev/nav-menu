@@ -6,6 +6,9 @@
       <button @click="add(2)">
         添加2个标签
       </button>
+      <button @click="setTab(2)">
+        修改2个标签
+      </button>
       <button @click="add(3)">
         添加3个标签
       </button>
@@ -42,6 +45,10 @@
           close(){
 
             this.$emit('closeTab',this.name,this.path);
+          },
+          setTab(val){
+            console.log("inner",val)
+            this.$emit('setTab',this.name+val,this.path+val,{name:"jack"});
           }
       }
     }

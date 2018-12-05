@@ -189,6 +189,7 @@
         topTab: [],
         showMenu: this.menus[0].name,
         activeTab: "",
+        oldTab:"",
         v2Path: "",
         v1Name: "",
       }
@@ -233,11 +234,35 @@
             q += i + "=" + obj[i] + "&"
           }
           e.path = e.path + q;
-        }//true
+        }
         e.params_len = arr.length != 0;
         this.changeMenu(e)
       },
-      closeTab(v) {
+      set(name,path,obj){
+        let newArr = [];
+        let e = {name: name, path: path, params: obj};
+        let arr = Object.keys(obj);
+        if (arr.length != 0) {
+          let q = "?";
+          for (var i in obj) {
+            q += i + "=" + obj[i] + "&"
+          }
+          e.path = e.path + q;
+        }
+        e.params_len = arr.length != 0;
+        this.topTab.forEach((tab, index) => {
+          if (tab.name == name) {
+
+          } else {
+            newArr.push(tab)
+          }
+        });
+
+        newArr.push(e);
+        this.topTab = newArr
+
+      },
+      closeTab(v){
         if (this.topTab.length == 1) {
           return
         }
@@ -287,7 +312,6 @@
         this.$router.push({path: v2.path, query: v2.params})
       },
       topChangeMenu(v) {
-       // console.log("top",v)
         this.activeTab = v.path;
         this.$router.push(v.path);
         if(v.params_len){
@@ -436,6 +460,10 @@
   }
 
   .light-danger .select, .light-danger a.third-hover:hover {
+    background: #f21b1b !important;
+  }
+
+  .dark-danger .select, .dark-danger a.third-hover:hover {
     background: #f21b1b !important;
   }
 
