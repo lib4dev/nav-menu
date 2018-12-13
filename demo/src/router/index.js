@@ -6,6 +6,9 @@ import UserBind from '@/pages/user/bind'
 import Product from '@/pages/user/product'
 import Info from '@/pages/user/info'
 import Fund from '@/pages/user/fund'
+import activityInfo from '@/pages/atv/activity/info'
+import Banner from '@/pages/atv/banner/page'
+import Gift from '@/pages/atv/gift/info'
 
 Vue.use(Router);
 
@@ -31,9 +34,21 @@ export default new Router({
           name: "info",
           component: Info
         }, {
-          path:"supplier/fund",
-          name:"fund",
-          component:Fund
+          path: "supplier/fund",
+          name: "fund",
+          component: Fund
+        }, {
+          path: "atv/activity/info",
+          name: "activityInfo",
+          component: activityInfo
+        }, {
+          path: "atv/banner/page",
+          name: "banner",
+          component: Banner
+        }, {
+          path: "atv/gift/info",
+          name: "gift",
+          component: Gift
         }
       ]
     },

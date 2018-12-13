@@ -119,6 +119,7 @@
         params:{pi:1,ps:10},        //页码，页容量控制
         totalcount: 0,              //数据总条数
         editData:{},                //编辑数据对象
+        addData:{},
         rules: {                    //数据验证规则
           sp_name: [
             { required: true, message: "请输入供货商名称", trigger: "blur" }

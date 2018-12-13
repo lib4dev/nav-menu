@@ -32,7 +32,7 @@ export default menus = [{
       "level_id": "3",
       "name": "券发布",
       "parent": "10577",
-      "path": "/repository/product",
+      "path": "/atv/activity/info",
       "sortrank": "2",
       "sys_id": "221"
     }],
@@ -55,7 +55,7 @@ export default menus = [{
       "level_id": "3",
       "name": "商户管理",
       "parent": "10572",
-      "path": "/merchant/merchant/info",
+      "path": "/atv/banner/page",
       "sortrank": "10573",
       "sys_id": "221"
     }],
@@ -78,7 +78,7 @@ export default menus = [{
       "level_id": "3",
       "name": "资金流水",
       "parent": "10595",
-      "path": "/supplier/fund",
+      "path": "/atv/gift/info",
       "sortrank": "4",
       "sys_id": "221"
     }],
