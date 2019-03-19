@@ -13,9 +13,9 @@
         <!-- brand -->
         <a href="#" class="navbar-brand text-lt">
 
-          <img :src="logo" alt="." class="hide">
+          <img :src="logo || logoc" alt="." class="hide">
           <span class="hidden-folded m-l-xs">
-            <img :src="logo" alt=".">
+            <img :src="logo || logoc" alt=".">
             <!--Micro-plat-->
           </span>
         </a>
@@ -32,7 +32,7 @@
             <i class="fa fa-indent fa-fw text-active"></i>
           </a>
         </div>
-        <div class="title">{{systemName}}</div>
+        <div class="title">{{systemName || systemNamec}}</div>
         <!-- / buttons -->
         <!-- nabar right -->
         <ul class="nav navbar-nav navbar-right">
@@ -46,7 +46,7 @@
           <li class="dropdown">
             <a href="#" data-toggle="class:show" class="dropdown-toggle clear" data-target="#user">
                             <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
-                <img :src="headpic" alt=".">
+                <img :src="headpic || headpicc" alt=".">
                 <i class="on md b-white bottom"></i>
               </span>
             </a>
@@ -54,7 +54,7 @@
             <ul class="dropdown-menu animated fadeInRight w" id="user">
               <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
                 <div>
-                  <p>{{userinfo.name}}--{{userinfo.role}}</p>
+                  <p>{{userinfo.name || username}}--{{userinfo.role || userrole}}</p>
                 </div>
               </li>
 
@@ -63,7 +63,7 @@
               </li>
               <li>
                 <a @click="goto('退出','/login')">
-                  <span class="label bg-info pull-right">NEW</span>
+                  <span class="label bg-info pull-right"></span>
                   退出
                 </a>
               </li>
@@ -138,11 +138,11 @@
 
     <!-- footer -->
     <div class="app-footer wrapper b-t bg-light">
-      <span class="pull-right">1.0.0
+      <span class="pull-right">
         <a href="#" class="m-l-sm text-muted">
-          <i class="fa fa-long-arrow-up"></i>
+          <!--<i class="fa fa-long-arrow-up"></i>-->
         </a>
-      </span> &copy; {{copyright}}
+      </span> &copy; {{copyright || copyrightc}}
     </div>
     <!-- / footer -->
   </div>
@@ -161,26 +161,36 @@
       },
       systemName: {
         type: String,
-        required: true
+        required: false
       },
       logo: {
         type: String,
-        required: true
+        required: false
       },
       copyright: {
         type: String,
-        required: true
+        required: false
       },
       themes: {
         type: String,
-        required: true
+        required: false
       },
       headpic: {
         type: String
       },
+      sessionKey:{
+        type:String,
+        default:"systeminfo"
+      },
+      sessionUserKey:{
+        type:String,
+        default:"userinfo"
+      },
       userinfo: {
         type: Object,
-        required: true,
+        default: ()=>{
+          return {name:'系统用户',role:'管理员'}
+        },
       },
       pwd: Function,
     },
@@ -192,20 +202,40 @@
         oldTab:"",
         v2Path: "",
         v1Name: "",
+        userinfos: JSON.parse(sessionStorage.getItem(this.sessionUserKey)),
+        systeminfos: JSON.parse(sessionStorage.getItem(this.sessionKey))
       }
     },
     computed: {
+      username() {
+        return this.userinfos ? this.userinfos.name : '系统用户'
+      },
+      userrole() {
+        return this.userinfos ? this.userinfos.role : '管理员'
+      },
+      systemNamec() {
+        return this.systeminfos ? this.systeminfos.name : "菜单系统"
+      },
+      logoc() {
+        return this.systeminfos ? this.systeminfos.logo : "https://imgx.0w0.tn/images/2019/03/19/aYU5GkLBw6qYexV4.png"
+      },
+      copyrightc() {
+        return this.systeminfos ? this.systeminfos.copyright : "版权信息"
+      },
 
+      headpicc() {
+        return this.systeminfos ? this.systeminfos.headpic : "https://imgx.0w0.tn/images/2019/03/19/jJ66VqK0hkDuBd4l.jpg"
+      },
       navbarHeaderClass: function () {
 
-        return this.themes.split('|')[0]
+        return　this.themes ? this.themes.split('|')[0] : this.themesc().split('|')[0]
       },
       navbarCollapseClass: function () {
 
-        return this.themes.split('|')[1]
+        return　this.themes ? this.themes.split('|')[1] : this.themesc().split('|')[1]
       },
       appAsideClass: function () {
-        return this.themes.split('|')[2]
+        return　this.themes ? this.themes.split('|')[2] : this.themesc().split('|')[2]
       },
 
     },
@@ -219,6 +249,9 @@
       },
     },
     methods: {
+      themesc() {
+        return this.systeminfos ? this.systeminfos.themes : "bg-danger|bg-danger|bg-dark light-danger"
+      },
       changePwd() {
         this.pwd(true)
       },
