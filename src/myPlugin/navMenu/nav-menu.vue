@@ -342,11 +342,11 @@
         if (!v2.params_len) {
           this.lightThirdMenu(v2.path);
         }
-        if((v2.path).search("http") == -1){
-          this.$router.push({path: v2.path, query: v2.params})
+        if((v2.path).indexOf("http://") == 0||(v2.path).indexOf("https://") == 0  ){
+          window.location.href = v2.path  
           return
         }
-        window.location.href = v2.path
+        this.$router.push({path: v2.path, query: v2.params})
       },
       topChangeMenu(v) {
         this.activeTab = v.path;
