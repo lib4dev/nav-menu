@@ -71,12 +71,12 @@ npm install nav-menu --save
 
 #### 配置参数说明
 
-|参数名 | 参数值 |   是否必传 | 说明　|　实例|  
+|参数名 | 参数值 |   是否必传 | 说明　|　实例 |  
 |:---:|-|-|-|-|-|  
 |menus | [{}]  | 是 | 菜单数据　|　详见如下（menus详解）|  
 userinfo | {}  | 否　|　用户信息（不传时不显示）|　{ name: "张三", role: "管理员" }  
 systemName | String  | 否　| 系统名称（默认为＂运营管理系统＂）|　"实惠生活管理系统"  
-logo | String  | 否　|　logo地址（不传为默认logo）|　"http://sso.sinopecscsy.com/static/img/43612a9fe1f92658cc3bc6e3edc0766e.png"
+logo | String  | 否　|　logo地址（不传为默认logo）|　"http://sso.sinopecscsy.com/static/img/43612a9fe1f92658cc3bc6e3edc0766e.png" 
 copyright | String  | 否　| 版权(不传时不显示)| "四川千行你我科技有限公司"  
 themes | String  | 否　|　主题　|   
 
