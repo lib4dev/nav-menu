@@ -32,7 +32,19 @@ export default menus = [{
       "level_id": "3",
       "name": "券发布",
       "parent": "10577",
-      "path": "/atv/activity/info",
+      "path": "http://www.baidu.com",
+      "sortrank": "2",
+      "sys_id": "221"
+    },
+    {
+      "create_time": "2018-09-13 15:28:00",
+      "icon": " ",
+      "id": "10578",
+      "is_open": "0",
+      "level_id": "3",
+      "name": "券修改",
+      "parent": "10577",
+      "path": "http://project.qianxing18.com:8888/zentao/project-task-30.html",
       "sortrank": "2",
       "sys_id": "221"
     }],

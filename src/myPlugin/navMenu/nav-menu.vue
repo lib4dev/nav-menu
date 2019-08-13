@@ -1,9 +1,10 @@
 <template>
+
   <div class="app app-header-fixed" id="app">
     <!-- navbar -->
     <div class="app-header navbar">
       <!-- navbar header -->
-      <div class="navbar-header bg-dark" :class="[navbarHeaderClass?navbarHeaderClass:'bg-info']">
+      <div class="navbar-header bg-dark" :class="[navbarHeaderClass?navbarHeaderClass:'bg-info']" style="text-align: center;">
         <button class="pull-right visible-xs dk" data-toggle="class:show" data-target=".navbar-collapse">
           <i class="glyphicon glyphicon-cog"></i>
         </button>
@@ -11,13 +12,17 @@
           <i class="glyphicon glyphicon-align-justify"></i>
         </button>
         <!-- brand -->
-        <a href="#" class="navbar-brand text-lt">
+        <a href="#" class="navbar-brand text-lt" v-if="logo">
 
           <img :src="logo || logoc" alt="." class="hide">
           <span class="hidden-folded m-l-xs">
             <img :src="logo || logoc" alt=".">
             <!--Micro-plat-->
           </span>
+        </a>
+        <a href="#" class="navbar-brand text-lt" style="line-height:0px !important" v-if="!logo">
+
+          <i class="iconfont icon-grid" style="font-size:32px; line-height:50px;"></i>
         </a>
         <!-- / brand -->
       </div>
@@ -44,17 +49,22 @@
           </li>
 
           <li class="dropdown">
-            <a href="#" data-toggle="class:show" class="dropdown-toggle clear" data-target="#user">
+              
+            <a href="#" data-toggle="class:show" class="dropdown-toggle clear" data-target="#user" v-if="headpic">
                             <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+                
                 <img :src="headpic || headpicc" alt=".">
                 <i class="on md b-white bottom"></i>
               </span>
             </a>
+            <a href="#" data-toggle="class:show" class="dropdown-toggle clear" style="padding-top: 7px; padding-bottom: 6px;" data-target="#user" v-if="!headpic">
+              <i class="iconfont icon-touxiang" style="font-size:38px; margin-right: 4px; line-height:34px;"></i>
+            </a>
             <!-- dropdown -->
             <ul class="dropdown-menu animated fadeInRight w" id="user">
-              <li class="wrapper b-b m-b-sm bg-light m-t-n-xs">
+              <li class="wrapper b-b m-b-sm bg-light m-t-n-xs" v-if="userinfo.name != ''">
                 <div>
-                  <p>{{userinfo.name || username}}--{{userinfo.role || userrole}}</p>
+                  <p style="margin:0px;">{{userinfo.name || username}} - {{userinfo.role || userrole}}</p>
                 </div>
               </li>
 
@@ -62,7 +72,7 @@
                 <a @click="changePwd">修改密码</a>
               </li>
               <li>
-                <a @click="goto('退出','/login')">
+                <a @click="loginOut">
                   <span class="label bg-info pull-right"></span>
                   退出
                 </a>
@@ -130,14 +140,23 @@
           </li>
         </ul>
 
-        <slot></slot>
-
+        <!-- <slot></slot> -->
+        <iframe v-show="fullUrl.indexOf('http://') == 0 || fullUrl.indexOf('https://') == 0" 
+          ref="bdIframe" id="bdIframe" 
+          :src="iframeUrl" 
+          width="100%" 
+          height="100%" 
+          frameborder="0" 
+          allowtransparency="true" 
+          allowfullscreen="true" 
+        ></iframe>
+        <router-view v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" />
       </div>
     </div>
     <!-- /content -->
 
     <!-- footer -->
-    <div class="app-footer wrapper b-t bg-light">
+    <div class="app-footer wrapper b-t bg-light" v-show="copyright">
       <span class="pull-right">
         <a href="#" class="m-l-sm text-muted">
           <!--<i class="fa fa-long-arrow-up"></i>-->
@@ -165,6 +184,7 @@
       },
       logo: {
         type: String,
+        default: "",
         required: false
       },
       copyright: {
@@ -176,7 +196,8 @@
         required: false
       },
       headpic: {
-        type: String
+        type: String,
+        required:false
       },
       sessionKey:{
         type:String,
@@ -189,10 +210,11 @@
       userinfo: {
         type: Object,
         default: ()=>{
-          return {name:'系统用户',role:'管理员'}
+          return {}
         },
       },
       pwd: Function,
+      signOut: Function,
     },
     data() {
       return {
@@ -203,31 +225,33 @@
         v2Path: "",
         v1Name: "",
         userinfos: JSON.parse(sessionStorage.getItem(this.sessionUserKey)),
-        systeminfos: JSON.parse(sessionStorage.getItem(this.sessionKey))
+        systeminfos: JSON.parse(sessionStorage.getItem(this.sessionKey)),
+
+        fullUrl: "",
+        iframeUrl: ""
       }
     },
     computed: {
       username() {
-        return this.userinfos ? this.userinfos.name : '系统用户'
+        return this.userinfos ? this.userinfos.name : ''
       },
       userrole() {
-        return this.userinfos ? this.userinfos.role : '管理员'
+        return this.userinfos ? this.userinfos.role : ''
       },
       systemNamec() {
-        return this.systeminfos ? this.systeminfos.name : "菜单系统"
+        return this.systeminfos ? this.systeminfos.name : "运营管理系统"
       },
       logoc() {
-        return this.systeminfos ? this.systeminfos.logo : "https://imgx.0w0.tn/images/2019/03/19/aYU5GkLBw6qYexV4.png"
+        return this.systeminfos ? this.systeminfos.logo : ""
       },
       copyrightc() {
-        return this.systeminfos ? this.systeminfos.copyright : "版权信息"
+        return this.systeminfos ? this.systeminfos.copyright : ""
       },
 
       headpicc() {
-        return this.systeminfos ? this.systeminfos.headpic : "https://imgx.0w0.tn/images/2019/03/19/jJ66VqK0hkDuBd4l.jpg"
+        return this.systeminfos ? this.systeminfos.headpic : "http://sso.sinopecscsy.com/static/img/a0.jpg"
       },
       navbarHeaderClass: function () {
-
         return　this.themes ? this.themes.split('|')[0] : this.themesc().split('|')[0]
       },
       navbarCollapseClass: function () {
@@ -240,7 +264,7 @@
 
     },
     mounted() {
-
+      this.setIfrema()
     },
     watch: {
       menus(newName, oldName) {
@@ -249,16 +273,34 @@
       },
     },
     methods: {
+      setIfrema(){
+        /**
+         * iframe-宽高自适应显示   
+         */
+        // var oIframe = document.getElementById('bdIframe')
+        var oIframe = this.$refs.bdIframe
+
+        var deviceWidth = document.documentElement.clientWidth;
+        var deviceHeight = document.documentElement.clientHeight;
+        oIframe.style.width = (Number(deviceWidth)-220) + 'px'; //数字是页面布局宽度差值
+        oIframe.style.height = (Number(deviceHeight)-150) + 'px'; //数字是页面布局高度差
+      },
       themesc() {
         return this.systeminfos ? this.systeminfos.themes : "bg-danger|bg-danger|bg-dark light-danger"
       },
       changePwd() {
         this.pwd(true)
       },
+      loginOut(){
+        this.signOut()
+      },
       goto(name, path) {
         this.changeMenu({name: name, path: path})
       },
-      add(name, path, obj) {
+      open(name, path, obj) {
+        if(obj == null){
+          obj = {}
+        }
         let e = {name: name, path: path, params: obj};
         let arr = Object.keys(obj);
         if (arr.length != 0) {
@@ -342,15 +384,22 @@
         if (!v2.params_len) {
           this.lightThirdMenu(v2.path);
         }
+        this.fullUrl = v2.path
         if((v2.path).indexOf("http://") == 0||(v2.path).indexOf("https://") == 0  ){
-          window.location.href = v2.path  
+          this.iframeUrl = v2.path
           return
         }
         this.$router.push({path: v2.path, query: v2.params})
       },
       topChangeMenu(v) {
         this.activeTab = v.path;
-        this.$router.push(v.path);
+        this.fullUrl = v.path
+        if((v.path).indexOf("http://") != 0 && (v.path).indexOf("https://") != 0  ){
+          this.$router.push(v.path);
+        }else{
+          this.iframeUrl = v.path
+        }
+        
         if(v.params_len){
           return
         }
@@ -414,6 +463,44 @@
   .icon-chahao:before {
     content: "\e617";
   }
+
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_890965_j83hufd2vw.eot?t=1565336753983'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_890965_j83hufd2vw.eot?t=1565336753983#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAATUAAsAAAAACsAAAASIAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDSAqIOIclATYCJAMYCw4ABCAFhG0HVBtXCcgOJSGRwMBggElgBOUauJfknwsIsp4VAKiybRVLIOk6nhRLAiHxqC0d4Ihw0ZpSs4grkjgElgs50YqoUjH9Nv9zzHhlbcP8NhvYlCrD1rThaDxKoAFF1GE/Pzwr4EY6PlC9w3abg3TlVz5OoLdQX9i2jDwGPBSOLHDGFdUggkdJr/SQQquqW5ZWb7BZQGrTXfwagMfx28cvCAkPkipzTtp7Ll2GpK/kBz9iVOMoVfkJjFruNKiQsR4oxPVW+zVEGl+P0Bs/QWc7MGol5Sv5vud79r3zg19jIyWx4w6j+y+PopIlQdSwfKSYncGKr75WMRQ9Mb9NwWKtjBVOzCTxzU94Wup6wSHzQJwFiJfgYNcb08kqSTsZkb28hqLJOX5/2nZG8+6eupnGUfMo6t4CDLuzUK+/Px/Y8m+WoTc29NVb5v47VvvAP3jPnL/fadW9tAsPOq/VqjSNZ/n799l792r9we+kv+a8N4yHGZbj+KEP3nNTHqMpgecSWT6eYeO4oRTnxVBD9dUVS9pQi1qVDaaw/hV17kHCA2w0f1JLn8rqieEktnLPmSthB+71vAX3kjffn6r12aoNpog7D6gpl3puutcez43UBpZfDYa3+qn3g4NeUHnvxOiTU4+vOlbdJrs6hN2BIkjcSQ4kkZtPdEPkH9AoV7rA4ixc1flMLM9cTsgNxPlNv1xzuriofbvi4lO3iorbtS8qOhELluOT09tULREXprbjJ+ENg4L+Y269gQCwD1+h1flPAZ/KzxzddXRnv4actJx0SPwwitQ6dtSQhKRVpEa8W8nFe51S+rQg/rZi5j9JpZ/MzZqmKVXYGHlKHJ43ZbScGZwiIDzFMSW4ulfLlMIp87PLcg0Bs4dGCrhDqEVl2Ihfn/xGZ3aa2dEOyu/hKR3yUtsPW9EqJ9PvvcBLcXwWbWqT1zxVxwh1uyb9rGxV3TSDbMcKNXiicUhsZUqrlKFjL/z5MqxNSBjZMZUIbfq1lq3dzQjMial+T8qntUxvxgKHSniqbVSdYfggGAY/SN6EnwL4vyq/JAQA8h38IcD/Mfl/vgnAxPnEk499mO/0mgG1vnH/PIb/v+69M313rP8/BiaHL1YBLPi0DZN0i4hNkWOoi17q84GsgdoTns9I6PX4oN1TPV9KPeMbsYa2JBCQNBZA1lqOKJj1UBlsgFprI/TWyVw9mMaBEKXDWuMRhMl2QjLRU8gmu44omGdQmekb1CYHAb3D0XTLwcpQqVQHEl1IpusG06pktSieyUUlmSXI0N8kOoqimMIhh1MN0cEBQdVUJrIgxxIznAMMIS6XQisOq5nOQKchk8lK2xzWBiS5AupdLltMYKDSdkcBktUMlK0cEJELIqPVGYymklhZKGFtF6r2+iUQg/5MRI6esgYrB3FwUjunBQsQBEBkyi2gskfJdxrAIISLRBU0RaRbmdEyiBUxuXErmq19UANE4hKgfkLUJkYgqaRA5QHbK81XuQ16znXVkSJHiSrqaJTzDlX2cFn7D1JFi8FNElVZtLhL9aLbx9qPFGWzagEA') format('woff2'),
+  url('//at.alicdn.com/t/font_890965_j83hufd2vw.woff?t=1565336753983') format('woff'),
+  url('//at.alicdn.com/t/font_890965_j83hufd2vw.ttf?t=1565336753983') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_890965_j83hufd2vw.svg?t=1565336753983#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-grid:before {
+  content: "\e710";
+}
+
+.icon-touxiang:before {
+  content: "\e673";
+}
+
+.icon-caidan:before {
+  content: "\e655";
+}
+
+.icon-chahao-:before {
+  content: "\e605";
+}
+
+.icon-admin:before {
+  content: "\e628";
+}
+
 
   .app-aside {
     position: fixed;
