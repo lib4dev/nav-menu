@@ -18,8 +18,8 @@
 
   //mock一些数据
   import Menus from './menus'
-  // import navMenu from 'nav-menu'; // 引入
-  import navMenu from '../../../../src/myPlugin/navMenu/nav-menu'
+  import navMenu from 'nav-menu'; // 引入
+  // import navMenu from '../../../../src/myPlugin/navMenu/nav-menu'
   export default {
     name: 'app',
     data () {
@@ -28,7 +28,7 @@
         systemName:"实惠生活管理系统",  //系统名称
         logo:"http://sso.sinopecscsy.com/static/img/43612a9fe1f92658cc3bc6e3edc0766e.png",
         copyright:"2018 四川千行你我科技有限公司", //版权信息
-        themes:"bg-info|bg-danger|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
+        themes:"bg-primary|bg-primary|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
         userinfo:{ name: "张三", role: "管理员" }
       }
     },

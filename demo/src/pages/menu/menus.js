@@ -97,7 +97,7 @@ export default menus = [{
     "create_time": "2018-09-13 15:40:37",
     "icon": "fa fa-paper-plane-o text-primary",
     "id": "10595",
-    "is_open": "1",
+    "is_open": "0",
     "level_id": "2",
     "name": "供应商",
     "parent": "10563",
