@@ -94,6 +94,7 @@ this.$refs.menu.open("核销订单", "/user/bind");   //设置默认页面
 | 参数名 | 参数值 |   是否必传   | 说明　|　实例 |  
 | :---: | :---: | :---: | :---: | :---: |    
 | menus | [{}]  | 是 | 菜单数据　|　详见如下（menus详解）|  
+| items | [] | 否　|　用户菜单数据（不传时不显示）|　详见如下（items详解）|  
 | userinfo | {} | 否　|　用户信息（不传时不显示）|　{ name: "张三", role: "管理员" }|  
 | systemName | String | 否　| 系统名称（默认为"运营管理系统"）|　"实惠生活管理系统"|  
 | logo | String  | 否 |　logo地址（不传为默认logo）|　"http://sso.sinopecscsy.com/static/img/test.png" | 
@@ -111,29 +112,80 @@ menus是菜单数据 其格式为
       "is_open": "0",
       "level_id": "3",
       "name": "核销订单",
-      "path": "/user/bind",
-      "sys_id": "221"
+      "path": "/user/bind"
     }],
     "icon": "fa fa-line-chart text-danger",
     "is_open": "1",
     "level_id": "2",
-    "name": "电子券订单",
-    "sys_id": "221"
+    "name": "电子券订单"
   }],
   "is_open": "0",
   "level_id": "1",
-  "name": "交易承载",
-  "sys_id": "221"
+  "name": "交易承载"
 }]
 ```
 
-1. is_open:-> 表示菜单是否展开显示 0:关闭 1:展开
-2. level_id:-> 表示结构层级关系
-3. path:-> 数据为相应菜单的路由地址  
+1. is_open:-> 表示菜单是否展开显示 0:关闭 1:展开 只有`level_id="2"` 菜单分类层时才有效果  
+2. level_id:-> 表示结构层级关系 有三层结构第一层为总菜单，每二层为菜单分类 第三层为菜单层   
+3. path:-> 表示为相应菜单的路由地址 只有`level_id="3"`时才会有菜单相应的地址  
 4. name:-> 相应菜单的名称  
-5. sys_id:-> 表示系统编号
 
 使用时只需要按照相关的格式构造数据并传入到组件中就可使用  
+
+#### items详解
+
+items是在用户信息中显示可配置的菜单数据 其格式为
+
+``` js
+items: [
+  {
+    name: "核销订单",
+    path: "/user/bind",
+    type: "blank"
+  },
+  {
+    name: "核销订单",
+    path: "/user/bind",
+    type: "self"
+  },
+  {
+    name: "修改用户信息",
+    type: "dialog"
+  },
+  {
+    name: "选择其他系统",
+    items: [
+      {
+        name: "短信系统",
+        path: "/msg",
+      },
+      {
+        name: "大象车生活",
+        type: "self",
+        path: "/user/bind",
+      },
+      {
+        name: "---"
+      },
+      {
+        name: "分销系统",
+        type: "self",
+        path: "http://www.baidu.com",
+      },
+      {
+        name: "卡券系统",
+        path: "/carlife",
+      }
+    ]
+  }
+]
+```
+
+1. name:-> 为菜单的名称  在第二层的items数组时,当`name: "---"`表示一个分隔线
+2. path:-> 为相应菜单名称的路径，可缺省
+3. type:-> 为菜单的类型默认值为"blank" 其类型分为: `blank`表示在浏览器中另开一个标签页打开 `self`表示在本标签打开 `dialog`表示可定义事件回调操作在使用时实现dialog方法便可实现相应的需求
+
+根据配置不同的类型及数据实现不同的需求
 
 #### 主题详解
 
@@ -179,6 +231,8 @@ bg-info|bg-danger|bg-dark //默认主题
       :copyright="copyright"
       :themes="themes"
       :logo="logo"
+      :items="items"
+      :dialog="showDialog" //点击事件回调
     >
     </nav-menu>
   </div>
@@ -196,7 +250,49 @@ bg-info|bg-danger|bg-dark //默认主题
         logo:"http://sso.sinopecscsy.com/static/img/test.png",
         copyright:"2018 四川千行你我科技有限公司", //版权信息
         themes:"bg-info|bg-danger|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
-        userinfo:{ name: "张三", role: "管理员" }
+        userinfo:{ name: "张三", role: "管理员" },
+        items: [
+          {
+            name: "核销订单",
+            path: "/user/bind",
+            type: "blank"
+          },
+          {
+            name: "核销订单",
+            path: "/user/bind",
+            type: "self"
+          },
+          {
+            name: "修改用户信息",
+            type: "dialog"
+          },
+          {
+            name: "选择其他系统",
+            items: [
+              {
+                name: "短信系统",
+                path: "/msg",
+              },
+              {
+                name: "大象车生活",
+                type: "self",
+                path: "/user/bind",
+              },
+              {
+                name: "---"
+              },
+              {
+                name: "分销系统",
+                type: "self",
+                path: "http://www.baidu.com",
+              },
+              {
+                name: "卡券系统",
+                path: "/carlife",
+              }
+            ]
+          }
+        ],
       }
     },
     components:{ //注册插件
@@ -217,6 +313,9 @@ bg-info|bg-danger|bg-dark //默认主题
             console.log(err)
           });
       },
+      showDialog(){
+        //处理回调
+      }
     }
   }
 </script>
@@ -229,6 +328,15 @@ bg-info|bg-danger|bg-dark //默认主题
 |   图1-1 |  图1-2   |
 | :-----: | :-----: |
 | ![预览](menu2-1.png)  | ![预览](menu2-2.png) |
+|   图1-3 |  图1-4   |
+| ![预览](links1.1.png)  | ![预览](links1.2.png) |
+|   图1-5 |  图1-6   |
+| ![预览](links1.3.png)  | ![预览](links1.4.png) |
 
 图1-1 红色区域为配置的系统logo，绿色区域为配置的系统名称，蓝色区域为配置的用户信息，橙色区域为配置的菜单，紫色区域为配置的版权  
 图1-2 配置了不同的主题所展示的效果
+图1-3 配置额外菜单数据的显示效果
+图1-4 当配置数据`type: "blank"`时会另起一个标签页打开相应的地址
+图1-5图1-6 当配置数据`type: "self"`时在本标签打开相应的地址
+
+> 项目中自带`demo`可自行下载运行查看

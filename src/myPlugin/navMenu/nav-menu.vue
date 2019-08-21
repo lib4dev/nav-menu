@@ -68,6 +68,30 @@
                 </div>
               </li>
 
+              <li v-for="(item, index) in items" v-if="items.length != 0">
+                <a :href="item.path" target="_blank" v-if="item.path && item.type != 'self'">{{item.name}}</a>
+                <a @click="openlinks(item)" v-if="item.path && item.type == 'self'">{{item.name}}</a>
+
+                <a @click="showDialog" v-if="item.type == 'dialog'">{{item.name}}</a>
+
+                <a @mouseover="showLinks()" @mouseout="disabelLinks()" v-if="item.items" class="dropdown-toggle clear" data-target="#message">{{item.name}}<i class="menus-i"> > </i></a>
+                
+                <div id="message" class="info-menus" v-if="show" @mouseover="showLinks()" @mouseout="disabelLinks()">
+                  <ul class="animated fadeInRight w" >
+                      <li v-for="(ii, index) in item.items">
+                        <a :href="ii.path" target="_blank" v-if="ii.name != '---' && ii.type != 'self'">{{ii.name}}</a>
+                        <a @click="openlinks(ii)" v-if="ii.name != '---' && ii.type == 'self'">{{ii.name}}</a>
+
+                        <div v-if="ii.name == '---'" class="links-line"></div>
+                      </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li style="border-bottom: 1px solid #dee5e7;" v-if="items.length != 0">
+
+              </li>
+
               <li>
                 <a @click="changePwd">修改密码</a>
               </li>
@@ -79,6 +103,10 @@
               </li>
             </ul>
             <!-- / dropdown -->
+          </li>
+
+          <li>
+            
           </li>
         </ul>
         <!-- / navbar right -->
@@ -213,8 +241,15 @@
           return {}
         },
       },
+      items: {
+        type: Array,
+        default: ()=>{
+          return []
+        },
+      },
       pwd: Function,
       signOut: Function,
+      dialog: Function,
     },
     data() {
       return {
@@ -228,7 +263,9 @@
         systeminfos: JSON.parse(sessionStorage.getItem(this.sessionKey)),
 
         fullUrl: "",
-        iframeUrl: ""
+        iframeUrl: "",
+
+        show: false,
       }
     },
     computed: {
@@ -293,6 +330,9 @@
       },
       loginOut(){
         this.signOut()
+      },
+      showDialog(){
+        this.dialog()
       },
       goto(name, path) {
         this.changeMenu({name: name, path: path})
@@ -433,6 +473,16 @@
       },
       lightThirdMenu(path) {  //点亮第三级菜单
         this.v2Path = path;
+      },
+
+      showLinks(){  
+        this.show = true
+      },
+      disabelLinks(){
+        this.show = false
+      },
+      openlinks(item){
+        this.open(item.name, item.path)
       }
     }
   })
@@ -621,5 +671,39 @@
 
   .dark-danger .nav-sub a span {
     color: #a8a8a8;
+  }
+
+  .menus-i{
+    position: absolute;
+    right: 15px;
+  }
+
+  .info-menus{
+    position: absolute;
+    right: 198px;
+    top:60px;
+    background: #fff;
+    padding: 5px 0;
+    border: 1px solid #f5f5f5;
+  }
+  .info-menus ul li{
+    margin-left:-20px;
+    padding:5px 0px 5px 10px; 
+    list-style-type:none;
+  }
+  .info-menus ul li:hover{
+    
+  }
+  .info-menus ul li a{
+    color: #555;
+    font-size: 14px;
+  }
+  .info-menus ul li a:hover {
+    color: #000;
+    font-weight: 600;
+  } 
+  .links-line{
+    border-bottom: 1px solid #dee5e7;
+    padding: 2px 0px 2px 0px;
   }
 </style>
