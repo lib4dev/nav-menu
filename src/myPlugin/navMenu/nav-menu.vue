@@ -178,7 +178,7 @@
           allowtransparency="true" 
           allowfullscreen="true" 
         ></iframe>
-        <router-view v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" />
+        <router-view v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" @addTab="open"/>
       </div>
     </div>
     <!-- /content -->

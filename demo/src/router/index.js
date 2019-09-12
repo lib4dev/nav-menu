@@ -10,6 +10,9 @@ import activityInfo from '@/pages/atv/activity/info'
 import Banner from '@/pages/atv/banner/page'
 import Gift from '@/pages/atv/gift/info'
 
+
+import UserFund from '@/pages/user/fund'
+
 Vue.use(Router);
 
 export default new Router({
@@ -24,6 +27,11 @@ export default new Router({
           path: "user/bind",
           name: "userbind",
           component: UserBind
+        },
+        {
+          path: "user/fund",
+          name: "Userfund",
+          component: UserFund
         },
         {
           path: "repository/product",

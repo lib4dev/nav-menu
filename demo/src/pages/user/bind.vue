@@ -65,6 +65,7 @@
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="editShow(scope.row)">编辑</el-button>
             <el-button type="text" size="small" @click="del(scope.row)">删除</el-button>
+            <el-button type="text" size="small" @click="openDetail(scope.row)">详情</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -253,6 +254,10 @@
             message: "已取消删除"
           });
         });
+      },
+      openDetail(item){
+        item.getpath = "/user/bind"
+        this.$emit(`addTab`, "详情", "/user/fund", item)
       }
     }
   }

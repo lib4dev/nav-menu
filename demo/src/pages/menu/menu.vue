@@ -20,8 +20,8 @@
 
   //mock一些数据
   import Menus from './menus'
-  import navMenu from 'nav-menu'; // 引入
-  // import navMenu from '../../../../src/myPlugin/navMenu/nav-menu'
+  // import navMenu from 'nav-menu'; // 引入
+  import navMenu from '../../../../src/myPlugin/navMenu/nav-menu'
   export default {
     name: 'app',
     data () {
