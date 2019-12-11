@@ -178,7 +178,10 @@
           allowtransparency="true" 
           allowfullscreen="true" 
         ></iframe>
-        <router-view v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" @addTab="open"/>
+
+        <keep-alive>
+          <router-view v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" @addTab="open"/>
+        </keep-alive>
       </div>
     </div>
     <!-- /content -->
@@ -266,6 +269,7 @@
         iframeUrl: "",
 
         show: false,
+        keepAlive: true
       }
     },
     computed: {

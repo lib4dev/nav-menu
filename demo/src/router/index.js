@@ -31,7 +31,10 @@ export default new Router({
         {
           path: "user/fund",
           name: "Userfund",
-          component: UserFund
+          component: UserFund,
+          meta: {
+            keepAlive: true  // 需要缓存
+          }
         },
         {
           path: "repository/product",
