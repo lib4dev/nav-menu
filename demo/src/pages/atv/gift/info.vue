@@ -6,6 +6,7 @@
 		    
         <div class="form-group">
           <el-input clearable  placeholder="请输入活动编号"></el-input>
+          <input placeholder="请输入活动编号"></input>
         </div>
         
         <div class="form-group">
@@ -128,7 +129,7 @@
 
 <script>
 export default {
-	name: "AtvGiftInfo",
+	name: "gift",
 	data () {
 		return {
     dialogAddVisible:false,     //添加表单显示隐藏

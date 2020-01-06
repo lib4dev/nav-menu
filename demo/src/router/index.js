@@ -29,12 +29,9 @@ export default new Router({
           component: UserBind
         },
         {
-          path: "user/fund",
+          path: "user/fund/:no",
           name: "Userfund",
-          component: UserFund,
-          meta: {
-            keepAlive: true  // 需要缓存
-          }
+          component: UserFund
         },
         {
           path: "repository/product",

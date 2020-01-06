@@ -179,8 +179,8 @@
           allowfullscreen="true" 
         ></iframe>
 
-        <keep-alive>
-          <router-view :key="$route.fullPath" v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" @addTab="open"/>
+        <keep-alive :include="keepAlivePath"> <!-- include="SysSupplierOrder" :key="$route.fullPath" -->
+          <router-view v-show="fullUrl.indexOf('http://') != 0 && fullUrl.indexOf('https://') != 0" @addTab="open"/>
         </keep-alive>
       </div>
     </div>
@@ -269,7 +269,8 @@
         iframeUrl: "",
 
         show: false,
-        keepAlive: true
+        keepAlive: true,
+        keepAlivePath: [],
       }
     },
     computed: {
@@ -385,6 +386,7 @@
         if (this.topTab.length == 1) {
           return
         }
+        this.removeMenuCache(v)
         let newArr = [];
         let path;
         let obj;
@@ -433,13 +435,18 @@
           this.iframeUrl = v2.path
           return
         }
-        this.$router.push({path: v2.path, query: v2.params})
+        this.$router.push({path: v2.path, query: v2.params}).catch(err => {err})
+
+        setTimeout(() =>{
+            this.addKeepAlivePath(this.$router.history.current.name)
+        }, 100 );
+        
       },
       topChangeMenu(v) {
         this.activeTab = v.path;
         this.fullUrl = v.path
         if((v.path).indexOf("http://") != 0 && (v.path).indexOf("https://") != 0  ){
-          this.$router.push(v.path);
+          this.$router.push(v.path).catch(err => {err})
         }else{
           this.iframeUrl = v.path
         }
@@ -487,6 +494,25 @@
       },
       openlinks(item){
         this.open(item.name, item.path)
+      },
+      addKeepAlivePath(v){
+        if (this.keepAlivePath){
+          var index = this.keepAlivePath.indexOf(v)
+          if (index == -1){
+            this.keepAlivePath.push(v)
+          }
+        }else{
+          this.keepAlivePath.push(v)
+        }
+      },
+      removeMenuCache(v){
+        var currentPath = this.$router.history.current.name
+        if (this.keepAlivePath){
+          var index = this.keepAlivePath.indexOf(currentPath)
+          if (index != -1){
+            this.keepAlivePath.splice(index, 1)
+          } 
+        }
       }
     }
   })

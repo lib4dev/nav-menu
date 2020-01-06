@@ -5,7 +5,8 @@
       <el-form ref="form"  :inline="true" class="form-inline pull-left add-qx-bottom">
 
         <div class="form-group">
-          <el-input clearable  placeholder="请输入供货商名称"></el-input>
+          <!-- <el-input  placeholder="请输入供货商名称"></el-input> -->
+          <input placeholder="请输入供货商名称"></input>
         </div>
 
         <div class="form-group">
@@ -111,7 +112,6 @@
 
 <script>
   export default {
-    name: "SysSupplierOrder",
     data () {
       return {
         dialogAddVisible:false,     //添加表单显示隐藏
@@ -152,6 +152,10 @@
           status: "status3",
         }]
       }
+    },
+    activated(){
+      console.log("00000000000000000000000000");
+      
     },
     mounted(){
       this.init()
@@ -257,7 +261,7 @@
       },
       openDetail(item){
         item.getpath = "/user/bind"
-        this.$emit(`addTab`, "详情", "/user/fund", item)
+        this.$emit(`addTab`, "详情" + item.sp_id, "/user/fund/" + item.sp_id, item)
       }
     }
   }

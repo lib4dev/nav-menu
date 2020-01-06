@@ -8,7 +8,20 @@
 
 <script>
     export default {
-        name: "fund"
+      data () {
+        return {
+          
+        }
+      },
+      watch:{
+        "$route.fullPath"(val) {
+          console.log("----------", val);
+
+        }
+      },
+      mounted(){
+
+      }
     }
 </script>
 
