@@ -328,7 +328,7 @@
         oIframe.style.height = (Number(deviceHeight)-150) + 'px'; //数字是页面布局高度差
       },
       themesc() {
-        return this.systeminfos ? this.systeminfos.themes : "bg-danger|bg-danger|bg-dark light-danger"
+        return this.systeminfos ? this.systeminfos.themes : "bg-white|bg-white|bg-light light-info"
       },
       changePwd() {
         this.pwd(true)
