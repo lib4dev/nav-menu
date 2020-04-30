@@ -3,6 +3,7 @@
     <nav-menu
       :menus="menus"
       :pwd="pwd"
+      :userinfo="userinfo"
       ref="NewTap"
     >
       <router-view  @addTab="addTab" @closeTab="closeTab" @setTab="setTab" />
@@ -18,6 +19,7 @@
     data () {
       return {
         menus:[{}],  //菜单数据
+        userinfo:{ name: "张三", role: "管理员" },
       }
     },
     components:{ //注册插件

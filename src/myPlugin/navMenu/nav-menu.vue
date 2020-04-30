@@ -64,7 +64,7 @@
             <ul class="dropdown-menu animated fadeInRight w" id="user">
               <li class="wrapper b-b m-b-sm bg-light m-t-n-xs" v-if="userinfo.name != ''">
                 <div>
-                  <p style="margin:0px;">{{userinfo.name || username}} - {{userinfo.role || userrole}}</p>
+                  <p style="margin:0px;">{{userinfo.name || username}} <span v-if="userinfo.role"> - {{userinfo.role || userrole}}</span></p>
                 </div>
               </li>
 
