@@ -286,7 +286,7 @@
       },
 
       headpicc() {
-        return this.systeminfos ? this.systeminfos.headpic : "http://sso.sinopecscsy.com/static/img/a0.jpg"
+        return this.systeminfos ? this.systeminfos.headpic : "http://sso.xxx.com/static/img/a0.jpg"
       },
       navbarHeaderClass: function () {
         return　this.themes ? this.themes.split('|')[0] : this.themesc().split('|')[0]

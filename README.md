@@ -97,7 +97,7 @@ this.$refs.menu.open("核销订单", "/user/bind");   //设置默认页面
 | items | [] | 否 |　用户菜单数据（不传时不显示）|　详见如下（items详解）|  
 | userinfo | {} | 否 |　用户信息（不传时不显示）|　{ name: "张三", role: "管理员" }|  
 | systemName | String | 否 | 系统名称（默认为"运营管理系统"）|　"实惠生活管理系统"|  
-| logo | String  | 否 |　logo地址（不传为默认logo）|　"http://sso.sinopecscsy.com/static/img/test.png" | 
+| logo | String  | 否 |　logo地址（不传为默认logo）|　"http://sso.xxx.com/static/img/test.png" | 
 | copyright | String  | 否 | 版权(不传时不显示)| "四川千行你我科技有限公司"|  
 | themes | String  | 否 |　主题　| 详见（主题详解）|  
 
@@ -247,7 +247,7 @@ bg-info|bg-danger|bg-dark //默认主题
       return {
         menus:[{}],  //菜单数据
         systemName:"实惠生活管理系统",  //系统名称
-        logo:"http://sso.sinopecscsy.com/static/img/test.png",
+        logo:"http://sso.xxx.com/static/img/test.png",
         copyright:"2018 四川千行你我科技有限公司", //版权信息
         themes:"bg-info|bg-danger|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
         userinfo:{ name: "张三", role: "管理员" },

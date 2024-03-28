@@ -28,7 +28,7 @@
       return {
         menus:Menus,  //菜单数据
         systemName:"实惠生活管理系统",  //系统名称
-        logo:"http://sso.sinopecscsy.com/static/img/43612a9fe1f92658cc3bc6e3edc0766e.png",
+        logo:"http://sso.xxx.com/static/img/43612a9fe1f92658cc3bc6e3edc0766e.png",
         copyright:"2018 四川千行你我科技有限公司", //版权信息
         themes:"bg-primary|bg-primary|bg-dark", //顶部左侧背景颜色,顶部右侧背景颜色,右边菜单背景颜色
         userinfo:{ name: "张三", role: "管理员" },
